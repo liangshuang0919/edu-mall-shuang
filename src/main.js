@@ -18,5 +18,5 @@ Vue.config.productionTip = false
 new Vue({
   router, // 注册 vue-router
   store, // 注册 vuex
-  render: h => h(App) // 渲染 vue 实例
+  render: (h) => h(App) // 渲染 vue 实例
 }).$mount('#app') // 挂载 vue 实例
