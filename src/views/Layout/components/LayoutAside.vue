@@ -1,8 +1,13 @@
 <template>
   <!-- 侧边栏组件 -->
   <div class="layout-aside">
-    <el-menu default-active="1" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff"
-      active-text-color="#ffd04b" unique-opened router>
+    <el-menu default-active="1" class="el-menu-vertical-demo" text-color="#666" active-text-color="#000" unique-opened router>
+      <!-- 后台管理项目的 title -->
+      <div class="title">
+        <img src="../../../assets/images/layout/my-logo.png" alt="">
+        <h1>Edu-Adm-Shuang</h1>
+      </div>
+
       <!-- 权限管理列表 -->
       <el-submenu index="1">
         <template slot="title">
@@ -66,12 +71,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// 整个侧边栏的样式
 .layout-aside {
   height: 100%;
 
+  // 侧边栏标题的样式
+  .title {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  // 侧边栏菜单的样式
   .el-menu {
     height: 100%;
     border-right: 0 none; // 去掉右边框默认的一个间距
+  }
+
+  // li 标签 hover 的样式
+  .el-menu-item:hover {
+    background-color: #1a0dc9;
+    background-color: #e9eef3;
   }
 }
 </style>

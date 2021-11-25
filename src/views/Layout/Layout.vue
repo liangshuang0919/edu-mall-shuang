@@ -53,12 +53,12 @@ export default {
 
   // 侧边栏的样式
   .el-aside {
-    background-color: #d3dce6;
+    background-color: #f8f9fb;
   }
 
   // 头部的样式
   .el-header {
-    background-color: #ffffff;
+    background-color: #f8f9fb;
   }
 
   // 主题内容的样式

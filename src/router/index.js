@@ -1,5 +1,6 @@
 import Vue from 'vue' // 导入 vue 实例，挂载上 vue-router
 import VueRouter from 'vue-router' // 导入创建 vue-router 的方法
+import store from '@/store' // 导入自己写的 vuex 内容
 
 Vue.use(VueRouter) // 将 vue-router 挂载到 vue 实例上
 
@@ -22,18 +23,23 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      title: '登录'
+    }
   },
   // 页面布局页面
   {
-    path: '',
-    name: 'Layout',
+    path: '/',
     component: Layout,
-    redirect: '/',
+    // 给一级路由设置 requiresAuth 后，自身和所有的子路由均需要进行路由权限认证
+    meta: {
+      requiresAuth: true // 需要进行登录校验页面访问权限
+    },
     children: [
       // 首页页面路由
       {
-        path: '/',
+        path: '',
         name: 'Home',
         component: Home,
         meta: {
@@ -120,13 +126,47 @@ const router = new VueRouter({
   routes // 将路由规则挂在给 router
 })
 
-// 路由守卫
+// 全局前置路由守卫
 router.beforeEach((to, from, next) => {
-  // 路由发生变化修改页面 title
-  if (to.meta.title) {
-    document.title = to.meta.title
+  // 进行路由校验页面访问权限
+  // to.meta.requiresAuth 表示验证 to（即将到达的路由）路由是否需要进行身份验证
+  // requiresAuth 必须和路由中 meta 定义的一致
+  // 1、只给一级路由设置 requiresAuth 即可验证所有子路由，然后用如下的方法判定
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    // 验证用户是否已经登录，通过获取 vuex 的用户信息进行验证
+    if (!store.state.user) {
+      // 用户未登录，跳转到登录页
+      return next({
+        name: 'Login',
+        query: {
+          // 将本次路由的 fullPath 传递给 Login 页面
+          redirect: to.fullPath
+        }
+      })
+    }
+
+    // 用户已经登录，允许访问其他页面
+    // 路由发生变化修改页面 title
+    if (to.meta.title) {
+      document.title = to.meta.title
+    }
+    next()
+  } else {
+    next()
   }
-  next()
+
+  // 2、需要单独对某一个子路由进行验证的话，只需要给子路由设置 requiresAuth 后，可以使用如下判定
+  // if (to.meta.requiresAuth) {
+  //   console.log('当前页面需要认证！')
+  //   // 路由发生变化修改页面 title
+  //   if (to.meta.title) {
+  //     document.title = to.meta.title
+  //   }
+  //   next()
+  // } else {
+  //   console.log('当前页面不需要认证！')
+  //   next()
+  // }
 })
 
 export default router // 导出路由
