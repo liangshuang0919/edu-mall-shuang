@@ -4,7 +4,7 @@
     <!-- elementUI 容器 -->
     <el-container>
       <!-- 侧边栏区域 -->
-      <el-aside width="225px">
+      <el-aside width="250px">
         <!-- 侧边栏组件 -->
         <layout-aside></layout-aside>
       </el-aside>
@@ -36,11 +36,6 @@ export default {
   components: {
     LayoutAside, // 侧边栏组件
     LayoutHeader // 头部组件
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>
@@ -49,7 +44,7 @@ export default {
 // 整体页面容器的样式
 .el-container {
   height: 100vh;
-  min-width: 980px;
+  min-width: 998px;
 
   // 侧边栏的样式
   .el-aside {

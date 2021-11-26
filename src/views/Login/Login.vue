@@ -7,8 +7,7 @@
     <el-form ref="form" :rules="formRules" label-position="top" :model="formData" label-width="250px" status-icon>
       <!-- 手机号输入框 -->
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone">
-        </el-input>
+        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone"></el-input>
       </el-form-item>
       <!-- 密码输入框 -->
       <el-form-item label="密码" prop="password">
@@ -33,7 +32,7 @@
 // import qs from 'qs'
 
 // 导入封装的接口
-// 1、导入用户接口
+// 1、login：用户登录接口
 import { login } from '@/services/user'
 
 export default {

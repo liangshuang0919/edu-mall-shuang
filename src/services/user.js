@@ -1,4 +1,5 @@
-import request from '@/utils/request' // 引入 request 请求模块
+// 用户请求的接口文件
+import request from '@/utils/request' // 导入自定义的 request 请求模块
 
 import qs from 'qs' // 导入 qs 模块，用来格式化 url 地址
 

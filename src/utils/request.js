@@ -63,7 +63,7 @@ let requestArr = [] // eslint-disable-line no-unused-vars
 request.interceptors.response.use(
   // 状态码 2XX（请求成功）执行
   function (response) {
-    console.log('响应成功：', response)
+    // console.log('响应成功：', response)
     return response
   },
   // 状态码超出 2XX（请求失败）执行

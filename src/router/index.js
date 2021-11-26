@@ -9,7 +9,10 @@ const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login/Login.
 const Layout = () => import(/* webpackChunkName: 'Layout' */ '@/views/Layout/Layout.vue') // 页面布局页面
 const Home = () => import(/* webpackChunkName: 'Home' */ '@/views/Home/Home.vue') // 首页页面
 const Role = () => import(/* webpackChunkName: 'Role' */ '@/views/Role/Role.vue') // ⻆⾊管理页面
-const Menu = () => import(/* webpackChunkName: 'Menu' */ '@/views/Menu/Menu.vue') // 菜单管理页面
+// 菜单管理模块
+const Menu = () => import(/* webpackChunkName: 'Menu' */ '@/views/Menu/Menu.vue') // 菜单列表主页面
+const MenuCreate = () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/Menu/MenuCreate.vue') // 添加菜单页面页面
+
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resource/Resource.vue') // 资源管理页面
 const Course = () => import(/* webpackChunkName: 'Course' */ '@/views/Course/Course.vue') // 课程管理页面
 const User = () => import(/* webpackChunkName: 'User' */ '@/views/User/User.vue') // ⽤户管理页面
@@ -25,7 +28,7 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: {
-      title: '登录'
+      title: 'Shuang-登录'
     }
   },
   // 页面布局页面
@@ -43,7 +46,7 @@ const routes = [
         name: 'Home',
         component: Home,
         meta: {
-          title: '首页'
+          title: 'Shuang-首页'
         }
       },
       // 角色管理页面路由
@@ -52,16 +55,25 @@ const routes = [
         name: 'Role',
         component: Role,
         meta: {
-          title: '角色管理'
+          title: 'Shuang-角色管理'
         }
       },
-      // 菜单管理页面路由
+      // 菜单列表页面路由
       {
         path: '/menu',
         name: 'Menu',
         component: Menu,
         meta: {
-          title: '菜单管理'
+          title: 'Shuang-菜单列表'
+        }
+      },
+      // 添加菜单页面路由
+      {
+        path: '/menu-create',
+        name: 'MenuCreate',
+        component: MenuCreate,
+        meta: {
+          title: 'Shuang-添加菜单'
         }
       },
       // 课程管理页面路由
@@ -70,7 +82,7 @@ const routes = [
         name: 'Course',
         component: Course,
         meta: {
-          title: '课程管理'
+          title: 'Shuang-课程管理'
         }
       },
       // 菜单管理页面路由
@@ -79,7 +91,7 @@ const routes = [
         name: 'Resource',
         component: Resource,
         meta: {
-          title: '菜单管理'
+          title: 'Shuang-菜单管理'
         }
       },
       // ⽤户管理页面路由
@@ -88,7 +100,7 @@ const routes = [
         name: 'User',
         component: User,
         meta: {
-          title: '⽤户管理'
+          title: 'Shuang-⽤户管理'
         }
       },
       // 广告管理页面路由
@@ -97,7 +109,7 @@ const routes = [
         name: 'Advert',
         component: Advert,
         meta: {
-          title: '广告管理'
+          title: 'Shuang-广告管理'
         }
       },
       // 广告位管理页面路由
@@ -106,7 +118,7 @@ const routes = [
         name: 'AdvertSpace',
         component: AdvertSpace,
         meta: {
-          title: '广告位管理'
+          title: 'Shuang-广告位管理'
         }
       }
     ]
