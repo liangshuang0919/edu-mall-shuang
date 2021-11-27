@@ -1,12 +1,12 @@
 <template>
   <!-- 侧边栏组件 -->
   <div class="layout-aside">
-    <el-menu default-active="1" class="el-menu-vertical-demo" text-color="#666" active-text-color="#2117a3  " unique-opened
-      router>
+    <el-menu default-active="1" class="el-menu-vertical-demo" text-color="#666"
+      active-text-color="#2117a3  " unique-opened router :collapse="isCollapse">
       <!-- 后台管理项目的 title -->
       <div class="title">
         <img src="../../../assets/images/layout/my-logo.png" alt="">
-        <h1>Edu-Adm-Shuang</h1>
+        <h1 v-show="!isCollapse">&nbsp;&nbsp;&nbsp;&nbsp;Edu-Shuang</h1>
       </div>
 
       <!-- 权限管理列表 -->
@@ -61,13 +61,24 @@
 </template>
 
 <script>
+// 导入 EventBus 的实例对象
+import { bus } from '@/EventBus'
+
 export default {
   name: 'LayoutAside',
   data () {
     return {
-
+      // 标题名字是否显示
+      isCollapse: false
     }
+  },
+  created () {
+    // 给 bus 注册事件，并接收数据
+    bus.$on('openAside', () => {
+      this.isCollapse = !this.isCollapse
+    })
   }
+
 }
 </script>
 
@@ -79,8 +90,9 @@ export default {
   // 侧边栏标题的样式
   .title {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    height: 60px;
 
     img {
       width: 30px;
@@ -98,5 +110,9 @@ export default {
   .el-menu-item:hover {
     background-color: #e9eef3;
   }
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  min-height: 400px;
 }
 </style>

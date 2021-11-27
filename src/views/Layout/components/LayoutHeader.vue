@@ -1,6 +1,11 @@
 <template>
   <!-- 头部组件区域 -->
   <div class="layout-header">
+    <!-- 点击展示隐藏侧边栏的按钮 -->
+    <button @click.prevent="btn">
+      <i :class="isOpen ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
+    </button>
+
     <!-- 左侧面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -34,6 +39,9 @@
 </template>
 
 <script>
+// 导入 EventBus 的实例对象
+import { bus } from '@/EventBus'
+
 // 导入接口
 // getUserInfo 是获取用户信息的接口
 import { getUserInfo } from '@/services/user'
@@ -43,10 +51,19 @@ export default {
   data () {
     return {
       // 用户信息
-      userInfo: {}
+      userInfo: {},
+      // 展开、关闭的图标样式
+      isOpen: true
     }
   },
   methods: {
+    btn () {
+      // 改变展开、关闭图标样式
+      this.isOpen = !this.isOpen
+
+      // 给事件总线 bus 触发自定义事件，传递数据
+      bus.$emit('openAside')
+    },
     // 用户头像显示失败的回调函数
     errorHandler () {
       return true
@@ -78,7 +95,7 @@ export default {
         })
 
         // 2、清除 vuex 中 store.state.user 的用户信息
-        this.$store.commit('saveUserInfo', null)
+        this.$store.commit('userLogout')
 
         // 3、跳转到登录页面
         this.$router.push('/login')
@@ -110,7 +127,29 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  // 展开、关闭菜单按钮
+  button {
+    flex: 1;
+    height: 100%;
+    border: 0;
+    background-color: #f8f9fb;
+
+    &:hover {
+      background-color: #dfe0e1;
+      cursor: pointer;
+    }
+
+    // 展开、关闭图标
+    i {
+      font-size: 20px;
+    }
+  }
+
+  // 中间面包屑导航样式
+  .el-breadcrumb {
+    flex: 25;
+  }
 
   // 右侧下拉框的样式
   .el-dropdown-link {

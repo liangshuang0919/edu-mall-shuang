@@ -22,7 +22,7 @@
         <!-- 操作 -->
         <el-table-column prop="name" align="center" label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -56,7 +56,15 @@ export default {
       }
     },
     // 编辑按钮方法
-    handleEdit () { },
+    handleEdit (rowData) {
+      // 做路由跳转
+      this.$router.push({
+        name: 'MenuEdit',
+        params: {
+          id: rowData.id // 动态路由的 id
+        }
+      })
+    },
     // 删除按钮方法
     handleDelete (rowData) {
       // 1、先进行删除确认，防止误点，使用 elementUI 的 MessageBox 组件
@@ -72,12 +80,12 @@ export default {
         // 判断删除是否成功
         if (data.code === '000000') {
           // 提示删除成功
-          this.$message.success('该列表项已删除成功！')
+          this.$message.success('该列表项已成功删除！')
           // 更新数据列表
           this.loadAllMenuInfo()
         }
       }).catch(() => {
-        this.$message.info('已取消删除~')
+        this.$message.info('已取消删除操作~')
       })
     }
   },

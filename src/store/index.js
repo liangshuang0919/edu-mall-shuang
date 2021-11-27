@@ -19,6 +19,14 @@ const store = new Vuex.Store({
       // 2、每次刷新页面，用户信息会被清空，将用户信息存储在本地中
       // 本地存储只能存储 JSON 格式，所以存储本地的时候，不需要将用户信息转换为对象格式
       window.localStorage.setItem('user', payload)
+    },
+    // 用户退出，清除本地存储的用户信息
+    userLogout(state) {
+      // 清空 vuex 中存储的用户信息
+      state.user = null
+
+      // 清空本地的 user 数据
+      window.localStorage.removeItem('user')
     }
   },
   // 3、异步修改 state 的方法

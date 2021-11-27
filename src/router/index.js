@@ -9,9 +9,11 @@ const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login/Login.
 const Layout = () => import(/* webpackChunkName: 'Layout' */ '@/views/Layout/Layout.vue') // 页面布局页面
 const Home = () => import(/* webpackChunkName: 'Home' */ '@/views/Home/Home.vue') // 首页页面
 const Role = () => import(/* webpackChunkName: 'Role' */ '@/views/Role/Role.vue') // ⻆⾊管理页面
+
 // 菜单管理模块
 const Menu = () => import(/* webpackChunkName: 'Menu' */ '@/views/Menu/Menu.vue') // 菜单列表主页面
 const MenuCreate = () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/Menu/MenuCreate.vue') // 添加菜单页面页面
+const MenuEdit = () => import(/* webpackChunkName: 'MenuEdit' */ '@/views/Menu/MenuEdit.vue') // 编辑菜单页面页面
 
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resource/Resource.vue') // 资源管理页面
 const Course = () => import(/* webpackChunkName: 'Course' */ '@/views/Course/Course.vue') // 课程管理页面
@@ -74,6 +76,15 @@ const routes = [
         component: MenuCreate,
         meta: {
           title: 'Shuang-添加菜单'
+        }
+      },
+      // 编辑菜单页面路由
+      {
+        path: '/menu-edit/:id',
+        name: 'MenuEdit',
+        component: MenuEdit,
+        meta: {
+          title: 'Shuang-编辑菜单'
         }
       },
       // 课程管理页面路由
