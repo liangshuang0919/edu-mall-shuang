@@ -9,3 +9,19 @@ export const getResourcePages = (data) => {
     data: data
   })
 }
+
+// 2、查询资源分类接口
+export const getResourceCategories = () => {
+  return request({
+    methods: 'GET',
+    url: '/boss/resource/category/getAll'
+  })
+}
+
+// 3、删除资源接口
+export const deleteResource = (id) => {
+  return request({
+    method: 'DELETE',
+    url: `/boss/resource/${id}`
+  })
+}

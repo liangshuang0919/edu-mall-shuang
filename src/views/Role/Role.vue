@@ -1,10 +1,20 @@
 <template>
-  <div class="role">⻆⾊管理</div>
+  <!-- 整个角色列表页面组件 -->
+  <div class="role">
+    <!-- 角色列表组件 -->
+    <role-list></role-list>
+  </div>
 </template>
 
 <script>
+// 导入角色列表组件
+import RoleList from './components/RoleList.vue'
+
 export default {
   name: 'Role',
+  components: {
+    RoleList // 角色列表组件
+  },
   data () {
     return {
 
@@ -13,5 +23,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

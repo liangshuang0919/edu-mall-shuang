@@ -79,13 +79,17 @@ export default {
 
         // 判断删除是否成功
         if (data.code === '000000') {
-          // 提示删除成功
-          this.$message.success('该列表项已成功删除！')
-          // 更新数据列表
-          this.loadAllMenuInfo()
+          this.$message.success('该列表项已成功删除！') // 提示删除成功
+          this.loadAllMenuInfo() // 更新数据列表
         }
-      }).catch(() => {
-        this.$message.info('已取消删除操作~')
+      }).catch((err) => {
+        if (err && err.response) {
+          // 删除请求失败
+          this.$message.error('删除失败，请重试！')
+        } else {
+          // 取消角色删除
+          this.$message.info('已取消删除操作~')
+        }
       })
     }
   },

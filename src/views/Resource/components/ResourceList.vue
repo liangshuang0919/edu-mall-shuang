@@ -4,24 +4,34 @@
     <el-card class="box-card">
       <!-- 头部区域，用来展示头部的筛选表单 -->
       <div slot="header" class="clearfix">
-        <el-form :inline="true" :model="formPageData" class="demo-form-inline">
-          <el-form-item label="审批人">
-            <el-input v-model="formPageData.user" placeholder="审批人"></el-input>
+        <el-form ref="form" :inline="true" :model="formPageData" class="demo-form-inline">
+          <!-- 资源名称 -->
+          <el-form-item label="资源名称" prop="name">
+            <el-input v-model="formPageData.name" placeholder="资源名称" clearable></el-input>
           </el-form-item>
-          <el-form-item label="活动区域">
-            <el-select v-model="formPageData.region" placeholder="活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+          <!-- 资源路径 -->
+          <el-form-item label="资源路径" prop="url">
+            <el-input v-model="formPageData.url" placeholder="资源路径" clearable></el-input>
+          </el-form-item>
+          <!-- 资源分类 -->
+          <el-form-item label="资源分类" prop="categoryId">
+            <el-select v-model="formPageData.categoryId" clearable placeholder="资源分类">
+              <!-- 请求接口进行下拉菜单设置，遍历数据进行下拉列表选项的渲染 -->
+              <el-option v-for="item in resourceCategories" :key="item.id" :label="item.name" :value="item.id">
+              </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="onQuery">查询</el-button>
+
+          <!-- 右侧按钮 -->
+          <el-form-item class="btnArea">
+            <el-button type="primary" @click="onQuery" :disabled="isLoading">查询</el-button>
+            <el-button @click="resetForm('form')">重置</el-button>
           </el-form-item>
         </el-form>
       </div>
 
       <!-- 主体区域，用来展示主体内容的展示表格 -->
-      <el-table :data="resourceData" border style="width: 100%">
+      <el-table :data="resourceData" border style="width: 100%" v-loading="isLoading">
         <!-- 编号 -->
         <el-table-column label="编号" type="index" width="50" align="center"></el-table-column>
         <!-- 资源名称 -->
@@ -50,10 +60,9 @@
 
     <!-- 底部分页区域 -->
     <div class="block">
-      <el-pagination :current-page.sync="formPageData.currentPage" :page-sizes="[10, 15, 20]"
-        :page-size="formPageData.pageSize" background :total="formPageData.totalCount"
-        layout="total, sizes, prev, pager, next, jumper" align="center"
-        @size-change="handleSizeChange" @current-change="handleCurrentChange">
+      <el-pagination :current-page.sync="formPageData.current" :page-sizes="[10, 15, 20]" :page-size="formPageData.size"
+        :total="totalCount" :disabled="isLoading" background layout="total, sizes, prev, pager, next, jumper"
+        align="center" @size-change="handleSizeChange" @current-change="handleCurrentChange">
       </el-pagination>
     </div>
   </div>
@@ -62,7 +71,9 @@
 <script>
 // 导入接口
 // 1、getResourcePages：按条件分页查询资源接口
-import { getResourcePages } from '@/services/resource'
+// 2、getResourceCategories：查询资源分类接口
+// 3、deleteResource：删除资源接口
+import { getResourcePages, getResourceCategories, deleteResource } from '@/services/resource'
 
 export default {
   name: 'ResourceList',
@@ -72,40 +83,80 @@ export default {
       resourceData: [],
       // 将头部筛选的表单数据，与底部分页要使用到的数据结合在一起，后续数据处理更方便了
       formPageData: {
-        currentPage: 1, // 当前显示的页号
-        pageSize: 10, // 每一页显示的数据条数
-        totalCount: 0
-      }
+        name: '', // 资源名称
+        url: '', // 资源路径
+        categoryId: '', // 资源分类 id
+        current: 1, // 当前显示的页号
+        size: 10 // 每一页显示的数据条数
+      },
+      // 数据总数
+      totalCount: 0,
+      resourceCategories: [], // 存储资源分类下拉列表信息
+      isLoading: false // 数据加载时，出现等待加载的遮罩层；并且控制按钮禁用状态
     }
   },
   methods: {
+    // 加载下拉资源列表
+    async loadResourceCategories () {
+      const { data } = await getResourceCategories()
+
+      // 判断是否请求成功
+      if (data.code === '000000') {
+        this.resourceCategories = data.data
+      }
+    },
     // 查询按钮事件
-    onQuery () { },
+    onQuery () {
+      // 下面是非常重要的一点，每次点击筛选的时候，将当前页数变为 1
+      this.formPageData.current = 1
+      // 筛条件筛选查询的时候，调用一次请求数据的函数
+      this.loadResource()
+    },
     // 异步请求按条件分页查询资源数据
     async loadResource () {
+      // 加载数据的时候，开启加载状态
+      this.isLoading = true
       // 获取服务器传递过来的当前页的资源数据
-      const { data } = await getResourcePages({
-        current: this.formPageData.currentPage, // 获取某一页的数据
-        size: this.formPageData.pageSize // 当前页的数据条数
-      })
+      const { data } = await getResourcePages(this.formPageData)
 
       // 判断请求是否成功
       if (data.code === '000000') {
+        this.isLoading = false // 取消加载状态
         this.resourceData = data.data.records // 获取要在列表中展示的数据
-        this.formPageData.totalCount = data.data.total // 服务器中资源列表数据的总数
+        this.totalCount = data.data.total // 服务器中资源列表数据的总数
       }
     },
     // 编辑按钮方法
     handleEdit (rowData) { },
     // 删除按钮方法
-    handleDelete (rowData) { },
+    handleDelete (rowData) {
+      this.$confirm(`确认删除该资源：${rowData.name}`, '删除提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          await deleteResource(rowData.id) // 发送删除角色请求
+          this.$message.success('该资源项已成功删除！') // 成功提示框
+          this.loadResource() // 加载数据
+        })
+        .catch(err => {
+          if (err && err.response) {
+            // 删除请求失败
+            this.$message.error('删除失败，请重试！')
+          } else {
+            // 取消角色删除
+            this.$message.info('已取消删除操作~')
+          }
+        })
+    },
     // 当每页条数发生变化时触发
     handleSizeChange (val) {
       // 修改每页显示的数据条数
-      this.formPageData.pageSize = val
+      this.formPageData.size = val
 
       // 由于修改了每页显示的条数，应当将页数归零
-      this.formPageData.currentPage = 1
+      this.formPageData.current = 1
 
       // 调用请求按条件分页查询资源数据的方法，让当前页具体的数据显示出来
       this.loadResource()
@@ -113,10 +164,14 @@ export default {
     // 页号改变触发事件
     handleCurrentChange (val) {
       // 修改页号
-      this.formPageData.currentPage = val
+      this.formPageData.current = val
 
       // 调用请求按条件分页查询资源数据的方法，让当前页具体的数据显示出来
       this.loadResource()
+    },
+    // 重置按钮，进行清空表单内容方法
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     }
   },
   filters: {
@@ -134,6 +189,8 @@ export default {
   created () {
     // 调用请求按条件分页查询资源数据函数
     this.loadResource()
+    // 加载资源列表
+    this.loadResourceCategories()
   }
 }
 </script>

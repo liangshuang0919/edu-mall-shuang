@@ -14,7 +14,7 @@ import qs from 'qs'
 
 // 创建 axios 的实例
 const request = axios.create({
-  timeout: 2000 // 请求超时 2000ms
+  // timeout: 2000 // 请求超时 2000ms
 })
 
 // 封装一个请求处理 baseURL 的方法
