@@ -41,7 +41,7 @@
         <!-- 资源描述 -->
         <el-table-column prop="description" label="资源描述" align="center"></el-table-column>
         <!-- 添加时间 -->
-        <el-table-column label="添加时间" align="center">
+        <el-table-column prop="createdTime" label="添加时间" align="center">
           <!-- 添加时间的数据，后台传递过来的需要修改，在 elementUI 中需要用作用域插槽进行数据的修改 -->
           <template slot-scope="scope">
             <!-- 使用过滤器对数据进行修改 -->

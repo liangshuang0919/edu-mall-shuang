@@ -8,7 +8,10 @@ Vue.use(VueRouter) // 将 vue-router 挂载到 vue 实例上
 const Login = () => import(/* webpackChunkName: 'login' */ '@/views/Login/Login.vue') // 登录页面
 const Layout = () => import(/* webpackChunkName: 'Layout' */ '@/views/Layout/Layout.vue') // 页面布局页面
 const Home = () => import(/* webpackChunkName: 'Home' */ '@/views/Home/Home.vue') // 首页页面
+
+// 角色管理模块
 const Role = () => import(/* webpackChunkName: 'Role' */ '@/views/Role/Role.vue') // ⻆⾊管理页面
+const AllocMenu = () => import(/* webpackChunkName: 'AllocMenu' */ '@/views/Role/AllocMenu.vue') // 分配菜单页面
 
 // 菜单管理模块
 const Menu = () => import(/* webpackChunkName: 'Menu' */ '@/views/Menu/Menu.vue') // 菜单列表主页面
@@ -58,6 +61,16 @@ const routes = [
         component: Role,
         meta: {
           title: 'Shuang-角色管理'
+        }
+      },
+      // 分配菜单页面路由
+      {
+        path: '/role/:roleId/alloc-menu',
+        name: 'AllocMenu',
+        component: AllocMenu,
+        props: true, // 将动态路由的参数通过 props 传递给组件
+        meta: {
+          title: 'Shuang-分配菜单'
         }
       },
       // 菜单列表页面路由
@@ -136,7 +149,7 @@ const routes = [
   },
   // 错误⻚⾯页面路由
   {
-    path: '/*', // 所有其他的页面就跳转到错误页
+    path: '*', // 所有其他的页面就跳转到错误页
     name: 'ErrorPage',
     component: ErrorPage,
     meta: {

@@ -7,11 +7,14 @@
     <el-form ref="form" :rules="formRules" label-position="top" :model="formData" label-width="250px" status-icon>
       <!-- 手机号输入框 -->
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone"></el-input>
+        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone" @keyup.enter.native="onSubmit">
+        </el-input>
       </el-form-item>
       <!-- 密码输入框 -->
       <el-form-item label="密码" prop="password">
-        <el-input v-model="formData.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock"></el-input>
+        <el-input v-model="formData.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock"
+          @keyup.enter.native="onSubmit">
+        </el-input>
       </el-form-item>
 
       <el-form-item class="btn">
