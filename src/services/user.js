@@ -21,3 +21,20 @@ export const getUserInfo = () => {
     url: '/front/user/getInfo'
   })
 }
+
+// 3、分页查询用户信息接口
+export const getUserPages = (data) => {
+  return request({
+    method: 'POST',
+    url: '/boss/user/getUserPages',
+    data: data
+  })
+}
+
+// 4、封禁用户接口
+export const forbidUser = (userId) => {
+  return request({
+    method: 'POST',
+    url: `/boss/user/forbidUser/${userId}`
+  })
+}

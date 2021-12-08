@@ -34,3 +34,28 @@ export const getRoleData = (id) => {
     url: `/boss/role/${id}`
   })
 }
+
+// 5、获取所有角色接口
+export const getAllRoles = () => {
+  return request({
+    method: 'GET',
+    url: '/boss/role/all'
+  })
+}
+
+// 6、给用户分配角色接口
+export const allocateUserRoles = (data) => {
+  return request({
+    method: 'POST',
+    url: '/boss/role/allocateUserRoles',
+    data: data
+  })
+}
+
+// 7、查询用户角色接口
+export const getUserRole = (userId) => {
+  return request({
+    method: 'GET',
+    url: `/boss/role/user/${userId}`
+  })
+}

@@ -19,7 +19,11 @@ const MenuCreate = () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/Me
 const MenuEdit = () => import(/* webpackChunkName: 'MenuEdit' */ '@/views/Menu/MenuEdit.vue') // 编辑菜单页面页面
 
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resource/Resource.vue') // 资源管理页面
+
+// 课程管理模块
 const Course = () => import(/* webpackChunkName: 'Course' */ '@/views/Course/Course.vue') // 课程管理页面
+const CourseCreate = () => import(/* webpackChunkName: 'CourseCreate' */ '@/views/Course/CourseCreate.vue') // 添加课程页面
+
 const User = () => import(/* webpackChunkName: 'User' */ '@/views/User/User.vue') // ⽤户管理页面
 const Advert = () => import(/* webpackChunkName: 'Advert' */ '@/views/Advert/Advert.vue') // 广告管理页面
 const AdvertSpace = () => import(/* webpackChunkName: 'AdvertSpace' */ '@/views/AdvertSpace/AdvertSpace.vue') // 广告位管理页面
@@ -107,6 +111,15 @@ const routes = [
         component: Course,
         meta: {
           title: 'Shuang-课程管理'
+        }
+      },
+      // 添加课程页面路由
+      {
+        path: '/course-create',
+        name: 'CourseCreate',
+        component: CourseCreate,
+        meta: {
+          title: 'Shuang-添加课程'
         }
       },
       // 菜单管理页面路由

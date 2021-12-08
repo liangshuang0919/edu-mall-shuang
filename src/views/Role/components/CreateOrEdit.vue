@@ -3,15 +3,15 @@
   <div class="create-or-edit">
     <el-form>
       <!-- 角色表单 -->
-      <el-form-item label="角色名称">
+      <el-form-item label="角色名称" label-width="80px">
         <el-input v-model="roleData.name"></el-input>
       </el-form-item>
       <!-- 角色编码 -->
-      <el-form-item label="角色编码">
+      <el-form-item label="角色编码" label-width="80px">
         <el-input v-model="roleData.code"></el-input>
       </el-form-item>
       <!-- 角色描述 -->
-      <el-form-item label="角色描述">
+      <el-form-item label="角色描述" label-width="80px">
         <el-input type="textarea" v-model="roleData.description"></el-input>
       </el-form-item>
       <!-- 操作按钮 -->

@@ -41,10 +41,13 @@
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
             <div>
-              <el-button type="text" @click="$router.push({ name: 'AllocMenu', params: { roleId: scope.row.id } })">
+              <el-button type="text"
+                @click="$router.push({ name: 'AllocMenu', params: { roleId: scope.row.id } })">
                 分配菜单
               </el-button>
-              <el-button type="text">分配资源</el-button>
+              <el-button type="text"
+                @click="$router.push({ name: 'AllocResource', params: { roleId: scope.row.id } })">分配资源
+              </el-button>
             </div>
             <div>
               <el-button type="text" @click="handleEdit(scope.row)">编辑</el-button>
@@ -57,8 +60,10 @@
       <!-- 添加角色和修改角色弹出的对话框 -->
       <!-- destroy-on-close 这个是 elementUI 自己的属性，当关闭对话框的时候，将该组件销毁 -->
       <!-- 因为如果对话框中的表单有内容的话，点击取消再次打开后还会保留上一次的数据，所以需要销毁 -->
-      <el-dialog :title="isEdit ? '编辑角色' : '添加角色'" :visible.sync="dialogVisible" v-if='dialogVisible' width="35%">
-        <create-or-edit :edit-role-id="editRoleId" :is-edit="isEdit" @set-success="handleSuccess" @set-cancel="handleCancel" />
+      <el-dialog :title="isEdit ? '编辑角色' : '添加角色'" :visible.sync="dialogVisible" v-if='dialogVisible'
+        width="35%">
+        <create-or-edit :edit-role-id="editRoleId" :is-edit="isEdit" @set-success="handleSuccess"
+          @set-cancel="handleCancel" />
       </el-dialog>
     </el-card>
   </div>
@@ -115,7 +120,7 @@ export default {
       // 刷新页面数据
       this.loadRoles()
     },
-    // 子组件保存或更新角色成功，告诉父组件的自定义事件
+    // 子组件取消编辑，告诉父组件的自定义事件
     handleCancel () {
       // 关闭提示框
       this.dialogVisible = false

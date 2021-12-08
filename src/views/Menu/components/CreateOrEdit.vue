@@ -27,7 +27,8 @@
 
             <!-- 2、下面是需要选择上级菜单的，说明当前这个菜单设置为二级菜单 -->
             <!-- 需要将获取的上级菜单数据进行渲染，最后选择某一个的数据，来设置权限管理 -->
-            <el-option v-for="item in parentMenuList" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in parentMenuList" :key="item.id" :label="item.name" :value="item.id">
+            </el-option>
           </el-select>
         </el-form-item>
 
