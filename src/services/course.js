@@ -27,3 +27,16 @@ export const saveOrUpdateCourse = (data) => {
     data: data
   })
 }
+
+// 4、上传图片接口
+export const upLoadCourseImage = (data, onUploadProgress) => {
+  // 注意该接口的请求数据类型是 multipart/form-data
+  // data 应该为 FormData 类型
+  return request({
+    method: 'POST',
+    url: '/boss/course/upload',
+    data: data,
+    // onUploadProgress 是 axios 自带的一个检测上传文件进度的回调函数
+    onUploadProgress
+  })
+}

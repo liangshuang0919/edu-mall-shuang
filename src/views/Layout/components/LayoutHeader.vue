@@ -2,7 +2,7 @@
   <!-- 头部组件区域 -->
   <div class="layout-header">
     <!-- 点击展示隐藏侧边栏的按钮 -->
-    <button @click.prevent="btn">
+    <button @click.prevent="handleSwitch">
       <i :class="isOpen ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
     </button>
 
@@ -57,12 +57,9 @@ export default {
     }
   },
   methods: {
-    btn () {
-      // 改变展开、关闭图标样式
-      this.isOpen = !this.isOpen
-
-      // 给事件总线 bus 触发自定义事件，传递数据
-      bus.$emit('openAside')
+    handleSwitch () {
+      this.isOpen = !this.isOpen // 改变展开、关闭图标样式
+      bus.$emit('openAside') // 给事件总线 bus 触发自定义事件，传递数据
     },
     // 用户头像显示失败的回调函数
     errorHandler () {
@@ -70,8 +67,7 @@ export default {
     },
     // 使用 async + await 异步加载用户信息
     async loadUserInfo () {
-      // 获取的用户信息
-      const { data } = await getUserInfo()
+      const { data } = await getUserInfo() // 获取的用户信息
 
       // 存储用户信息
       this.userInfo = {

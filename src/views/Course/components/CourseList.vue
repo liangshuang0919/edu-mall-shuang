@@ -51,21 +51,18 @@
         <!-- 上架状态 -->
         <el-table-column prop="status" label="上架状态">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949"
-              :active-value="1" :inactive-value="0" :disabled="scope.row.isStatusLoading"
-              @change="handleChangeState(scope.row)">
+            <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949" :active-value="1"
+              :inactive-value="0" :disabled="scope.row.isStatusLoading" @change="handleChangeState(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
         <!-- 操作 -->
         <el-table-column prop="price" label="操作" width="200" align="center">
           <template slot-scope="scope">
-            <el-button size="mini"
-              @click="$router.push({ name: 'course-edit', params: { courseId: scope.row.id }})">
+            <el-button size="mini" @click="$router.push({ name: 'course-edit', params: { courseId: scope.row.id }})">
               编辑
             </el-button>
-            <el-button size="mini"
-              @click="$router.push({ name: 'course-section', params: { courseId: scope.row.id }})">
+            <el-button size="mini" @click="$router.push({ name: 'course-section', params: { courseId: scope.row.id }})">
               内容管理
             </el-button>
           </template>

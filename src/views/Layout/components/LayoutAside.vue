@@ -1,8 +1,8 @@
 <template>
   <!-- 侧边栏组件 -->
   <div class="layout-aside">
-    <el-menu default-active="1" class="el-menu-vertical-demo" text-color="#666"
-      active-text-color="#2117a3  " unique-opened router :collapse="isCollapse">
+    <el-menu default-active="1" class="el-menu-vertical-demo" text-color="#666" active-text-color="#2117a3  "
+      unique-opened router :collapse="isCollapse">
       <!-- 后台管理项目的 title -->
       <div class="title">
         <img src="../../../assets/images/layout/my-logo.png" alt="">
@@ -68,8 +68,7 @@ export default {
   name: 'LayoutAside',
   data () {
     return {
-      // 标题名字是否显示
-      isCollapse: false
+      isCollapse: false // 标题名字是否显示
     }
   },
   created () {
