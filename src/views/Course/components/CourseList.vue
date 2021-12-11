@@ -59,7 +59,7 @@
         <!-- 操作 -->
         <el-table-column prop="price" label="操作" width="200" align="center">
           <template slot-scope="scope">
-            <el-button size="mini" @click="$router.push({ name: 'course-edit', params: { courseId: scope.row.id }})">
+            <el-button size="mini" @click="$router.push({ name: 'CourseEdit', params: { courseId: scope.row.id }})">
               编辑
             </el-button>
             <el-button size="mini" @click="$router.push({ name: 'course-section', params: { courseId: scope.row.id }})">

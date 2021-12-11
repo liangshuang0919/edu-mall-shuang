@@ -56,22 +56,22 @@ function redirectLogin() {
 
 // 存储当前是否正在更新 token 的一个状态
 let isRefreshing = false // eslint-disable-line no-unused-vars
-// 存储因为等待 token 刷新而挂起的请求，最后需要统一执行
+  // 存储因为等待 token 刷新而挂起的请求，最后需要统一执行
 let requestArr = [] // eslint-disable-line no-unused-vars
 
 // 设置响应拦截器
 request.interceptors.response.use(
   // 状态码 2XX（请求成功）执行
-  function (response) {
+  function(response) {
     // console.log('响应成功：', response)
     return response
   },
   // 状态码超出 2XX（请求失败）执行
-  function (error) {
+  function(error) {
     if (error.response) {
       // 请求发送成功，响应接受完毕，但是状态码失败的情况
       const { status } = error.response // 获取状态码
-      // 初始化错误信息
+        // 初始化错误信息
       let errorMessage = '' // eslint-disable-line no-unused-vars
 
       // 判断状态码，不同的状态码进行不一样的处理
@@ -104,13 +104,13 @@ request.interceptors.response.use(
         // 2、Token 无效（过期）的处理
         // 发送刷新 Token 的请求，获取新的 access_token
         return request({
-          method: 'POST',
-          url: '/front/user/refresh_token',
-          data: qs.stringify({
-            // 注意接口文档中，refresdtoken 关键字没有下划线，而返回的数据需要加下划线
-            refreshtoken: store.state.user.refresh_token
+            method: 'POST',
+            url: '/front/user/refresh_token',
+            data: qs.stringify({
+              // 注意接口文档中，refresdtoken 关键字没有下划线，而返回的数据需要加下划线
+              refreshtoken: store.state.user.refresh_token
+            })
           })
-        })
           .then((res) => {
             // 判断是否请求到新的 access_token，这时候分两种情况讨论
             // 1、对用户请求新的 token 时失败的处理
@@ -128,11 +128,11 @@ request.interceptors.response.use(
             // 2、对用户请求新的 token 成功的时候的处理
             //  2.1 将响应到的新的数据存储到本地
             store.commit('saveUserInfo', res.data.content)
-            //  2.2 重新发送刚才失败的请求（根据 requestArr 数组，发送所有失败的请求）
+              //  2.2 重新发送刚才失败的请求（根据 requestArr 数组，发送所有失败的请求）
             requestArr.forEach((callback) => callback())
-            //  2.3 将所有失败的请求发送完毕之后，清除 requestArr 数组的内容即可
+              //  2.3 将所有失败的请求发送完毕之后，清除 requestArr 数组的内容即可
             requestArr = []
-            //  2.4 将本次请求发送（注意，本次请求并没有存在 requestArr 中，因为第一次的请求其获取 token 的请求是成功的）
+              //  2.4 将本次请求发送（注意，本次请求并没有存在 requestArr 中，因为第一次的请求其获取 token 的请求是成功的）
             return request(error.config)
           })
           .catch((err) => {

@@ -23,6 +23,7 @@ const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resour
 // 课程管理模块
 const Course = () => import(/* webpackChunkName: 'Course' */ '@/views/Course/Course.vue') // 课程管理页面
 const CourseCreate = () => import(/* webpackChunkName: 'CourseCreate' */ '@/views/Course/CourseCreate.vue') // 添加课程页面
+const CourseEdit = () => import(/* webpackChunkName: 'CourseEdit' */ '@/views/Course/CourseEdit.vue') // 编辑课程页面
 
 const User = () => import(/* webpackChunkName: 'User' */ '@/views/User/User.vue') // ⽤户管理页面
 const Advert = () => import(/* webpackChunkName: 'Advert' */ '@/views/Advert/Advert.vue') // 广告管理页面
@@ -120,6 +121,16 @@ const routes = [
         component: CourseCreate,
         meta: {
           title: 'Shuang-添加课程'
+        }
+      },
+      // 编辑课程页面路由
+      {
+        path: '/course-edit/:courseId',
+        name: 'CourseEdit',
+        component: CourseEdit,
+        props: true, // 将动态路由的参数通过 props 传递给组件
+        meta: {
+          title: 'Shuang-编辑课程'
         }
       },
       // 菜单管理页面路由
