@@ -25,24 +25,24 @@
       <!-- 主体列表区域 -->
       <el-table :data="users" style="width: 100%" v-loading="isLoading">
         <!-- 用户 ID -->
-        <el-table-column prop="id" label="用户ID" width="150"></el-table-column>
+        <el-table-column prop="id" label="用户ID" width="150" align="center"></el-table-column>
         <!-- 用户头像 -->
-        <el-table-column prop="name" label="头像" width="100">
+        <el-table-column prop="name" label="头像" width="100" align="center">
           <template slot-scope="scope">
             <img width="30px"
               :src="scope.row.portrait || 'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'">
           </template>
         </el-table-column>
         <!-- 用户名 -->
-        <el-table-column prop="name" label="用户名"></el-table-column>
+        <el-table-column prop="name" label="用户名" align="center"></el-table-column>
         <!-- 手机号 -->
-        <el-table-column prop="phone" label="手机号"></el-table-column>
+        <el-table-column prop="phone" label="手机号" align="center"></el-table-column>
         <!-- 用户注册时间 -->
-        <el-table-column prop="createTime" label="注册时间">
+        <el-table-column prop="createTime" label="注册时间" align="center">
           <!-- 用户状态操作（服务端没有开放权限，只能演示） -->
         </el-table-column>
         <!-- 用户状态 -->
-        <el-table-column prop="name" label="状态" width="80">
+        <el-table-column prop="name" label="状态" width="80" align="center">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.status" active-value="ENABLE" inactive-value="DISABLE"
               active-color="#13ce66" inactive-color="#ff4949" @change="handleForbidUser(scope.row)">
@@ -50,7 +50,7 @@
           </template>
         </el-table-column>
         <!-- 用户操作 -->
-        <el-table-column prop="address" label="操作">
+        <el-table-column prop="address" label="操作" align="center">
           <template slot-scope="scope">
             <el-button type="text" @click="handleSelectRole(scope.row)">分配角色</el-button>
           </template>
@@ -59,7 +59,6 @@
 
       <!-- 设置分配角色的对话框组件 -->
       <el-dialog title="提示" :visible.sync="dialogVisible" width="50%">
-        <!-- <span>分配角色</span> -->
         <!-- 下拉菜单的区域 -->
         <el-select v-model="roleIdList" multiple placeholder="请选择">
           <el-option v-for="item in roles" :key="item.value" :label="item.name" :value="item.id">

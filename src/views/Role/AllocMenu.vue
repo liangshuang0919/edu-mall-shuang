@@ -3,11 +3,18 @@
   <div class="alloc-menu">
     <el-card class="box-card">
       <!-- 列表操作按钮 -->
-      <div style="margin: 20px;">
-        <el-button @click="onReset">清空</el-button>
-        <el-button type="primary" @click="onSave">保存</el-button>
+      <div slot="header" class="box-card-header">
+        <!-- 返回按钮 -->
+        <el-button class="el-icon-back" @click="$router.push({ name: 'Role' })">
+          返回
+        </el-button>
+        <div>
+          <el-button @click="onReset">清空</el-button>
+          <el-button type="primary" @click="onSave">保存</el-button>
+        </div>
       </div>
       <!-- 菜单列表展示 -->
+      <br />
       <el-tree ref="menu-tree" node-key="id" :data="menuNodeListData" :props="defaultProps"
         :default-checked-keys="checkedKeys" show-checkbox default-expand-all @node-click="handleNodeClick">
       </el-tree>
@@ -113,4 +120,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// 卡片头部区域样式
+.box-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

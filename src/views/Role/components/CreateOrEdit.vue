@@ -17,7 +17,9 @@
       <!-- 操作按钮 -->
       <el-form-item align="center">
         <el-button style="width: 25%" @click="onCancel">取消</el-button>
-        <el-button style="width: 25%" type="primary" @click="onSubmit">{{ isEdit ? '保存' : '创建' }}</el-button>
+        <el-button style="width: 25%" type="primary" @click="onSubmit">
+          {{ isEdit ? '保存' : '创建' }}
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -73,7 +75,11 @@ export default {
         // 关闭提示框（需要子组件向父组件传递状态）
         this.$emit('set-success')
         // 保存或更新角色成功提示
-        this.$message.success('添加成功！')
+        this.$message({
+          type: 'success',
+          message: '添加成功~',
+          duration: 1000
+        })
         // 清除表单内容
         this.roleData = {}
       }

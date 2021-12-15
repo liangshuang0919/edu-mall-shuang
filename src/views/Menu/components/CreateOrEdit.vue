@@ -3,8 +3,13 @@
   <div class="create-or-edit">
     <el-card class="box-card">
       <!-- 头部区域 -->
-      <div slot="header" class="clearfix">
-        <span>{{ isEdit ? '编辑菜单' : '添加菜单' }}</span>
+      <div slot="header" class="card-header">
+        <!-- 返回按钮 -->
+        <el-button class="el-icon-back" @click="$router.push({ name: 'Menu' })">
+          返回
+        </el-button>
+        <!-- 表单标题 -->
+        <h3>{{ isEdit ? '编辑菜单' : '添加菜单' }}</h3>
       </div>
 
       <!-- 表单区域 -->
@@ -179,4 +184,23 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// 全局样式
+.create-or-edit {
+  // 卡片头部区域样式
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  // 菜单表单区域的样式
+  ::v-deep .el-card__body {
+    padding: 20px;
+  }
+}
+</style>

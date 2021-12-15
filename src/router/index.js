@@ -2,6 +2,12 @@ import Vue from 'vue' // 导入 vue 实例，挂载上 vue-router
 import VueRouter from 'vue-router' // 导入创建 vue-router 的方法
 import store from '@/store' // 导入自己写的 vuex 内容
 
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
+
 Vue.use(VueRouter) // 将 vue-router 挂载到 vue 实例上
 
 // 导入 vue  组件，进行路有懒加载
@@ -24,6 +30,8 @@ const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resour
 const Course = () => import(/* webpackChunkName: 'Course' */ '@/views/Course/Course.vue') // 课程管理页面
 const CourseCreate = () => import(/* webpackChunkName: 'CourseCreate' */ '@/views/Course/CourseCreate.vue') // 添加课程页面
 const CourseEdit = () => import(/* webpackChunkName: 'CourseEdit' */ '@/views/Course/CourseEdit.vue') // 编辑课程页面
+const CourseSection = () => import(/* webpackChunkName: 'CourseSection' */ '@/views/Course/CourseSection.vue') // 课程内容管理页面
+const CourseVideo = () => import(/* webpackChunkName: 'CourseVideo' */ '@/views/Course/CourseVideo.vue') // 上传课时视频页面
 
 const User = () => import(/* webpackChunkName: 'User' */ '@/views/User/User.vue') // ⽤户管理页面
 const Advert = () => import(/* webpackChunkName: 'Advert' */ '@/views/Advert/Advert.vue') // 广告管理页面
@@ -131,6 +139,26 @@ const routes = [
         props: true, // 将动态路由的参数通过 props 传递给组件
         meta: {
           title: 'Shuang-编辑课程'
+        }
+      },
+      // 课程内容管理页面路由
+      {
+        path: '/course-section/:courseId',
+        name: 'CourseSection',
+        component: CourseSection,
+        props: true, // 将动态路由的参数通过 props 传递给组件
+        meta: {
+          title: 'Shuang-课程内容管理'
+        }
+      },
+      // 上传课时视频页面路由
+      {
+        path: '/course-video/:courseId',
+        name: 'CourseVideo',
+        component: CourseVideo,
+        props: true, // 将动态路由的参数通过 props 传递给组件
+        meta: {
+          title: 'Shuang-上传课时视频'
         }
       },
       // 菜单管理页面路由

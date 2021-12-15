@@ -7,7 +7,7 @@
       </div>
 
       <!-- 头部表单区域 -->
-      <el-form :inline="true" ref="form" label-position="left" :model="filterParams">
+      <el-form class="course-form" :inline="true" ref="form" label-position="left" :model="filterParams">
         <!-- 课程名称输入框 -->
         <el-form-item label="课程名称：" prop="courseName">
           <el-input v-model="filterParams.courseName"></el-input>
@@ -41,28 +41,30 @@
       <!-- 课程展示区域 -->
       <el-table class="course-table" :data="courses" v-loading="isLoading">
         <!-- ID -->
-        <el-table-column prop="id" label="ID" width="100" />
+        <el-table-column prop="id" label="ID" width="110" align="center" />
         <!-- 课程名称 -->
-        <el-table-column prop="courseName" label="课程名称" width="230" />
+        <el-table-column prop="courseName" label="课程名称" width="250" align="center" />
         <!-- 价格 -->
-        <el-table-column prop="price" label="价格" />
+        <el-table-column prop="price" label="价格" align="center" />
         <!-- 排序 -->
-        <el-table-column prop="sortNum" label="排序" />
+        <el-table-column prop="sortNum" label="排序" align="center" />
         <!-- 上架状态 -->
-        <el-table-column prop="status" label="上架状态">
+        <el-table-column prop="status" label="上架状态" align="center">
           <template slot-scope="scope">
-            <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949" :active-value="1"
-              :inactive-value="0" :disabled="scope.row.isStatusLoading" @change="handleChangeState(scope.row)">
+            <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949"
+              :active-value="1" :inactive-value="0" :disabled="scope.row.isStatusLoading"
+              @change="handleChangeState(scope.row)">
             </el-switch>
           </template>
         </el-table-column>
         <!-- 操作 -->
-        <el-table-column prop="price" label="操作" width="200" align="center">
+        <el-table-column prop="price" label="操作" align="center" width="180">
           <template slot-scope="scope">
-            <el-button size="mini" @click="$router.push({ name: 'CourseEdit', params: { courseId: scope.row.id }})">
+            <el-button size="mini"
+              @click="$router.push({ name: 'CourseEdit', params: { courseId: scope.row.id }})">
               编辑
             </el-button>
-            <el-button size="mini" @click="$router.push({ name: 'course-section', params: { courseId: scope.row.id }})">
+            <el-button size="mini" @click="handleManage(scope.row)">
               内容管理
             </el-button>
           </template>
@@ -148,6 +150,19 @@ export default {
         }, 1000)
       }
     },
+    // 内容管理按钮触发的事件
+    handleManage (course) {
+      // 路由跳转
+      this.$router.push({
+        name: 'CourseSection',
+        params: {
+          courseId: course.id
+        },
+        query: {
+          courseName: course.courseName
+        }
+      })
+    },
     // 当每页条数发生变化时触发
     handleSizeChange (val) {
       this.filterParams.size = val // 修改每页显示的数据条数
@@ -173,6 +188,12 @@ export default {
 // 课程列表页面组件全局样式
 .el-card {
   margin-bottom: 20px;
+
+  .course-form {
+    padding: 0;
+    margin: 0;
+    padding: 20px;
+  }
 
   // 添加课程按钮样式
   .course-create {

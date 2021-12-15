@@ -77,7 +77,6 @@ export default {
       this.isCollapse = !this.isCollapse
     })
   }
-
 }
 </script>
 

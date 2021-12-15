@@ -7,7 +7,8 @@ Vue.use(Vuex) // 挂载 vuex
 const store = new Vuex.Store({
   // 1、vuex 数据
   state: {
-    user: JSON.parse(window.localStorage.getItem('user')) || null // 用户登录城后，保存用户信息（初始值尝试读取本地存储的用户信息）
+    // 用户登录城后，保存用户信息（初始值尝试读取本地存储的用户信息）
+    user: JSON.parse(window.localStorage.getItem('user')) || null
   },
   // 2、同步修改 state 的方法
   mutations: {

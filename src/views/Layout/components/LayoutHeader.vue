@@ -9,9 +9,9 @@
     <!-- 左侧面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      <el-breadcrumb-item v-if="$route.path !== '/'">
+        <router-link :to="$route.path">{{ $route.meta.title.split('-')[1] }}</router-link>
+      </el-breadcrumb-item>
     </el-breadcrumb>
 
     <!-- 右侧用户信息区域 -->
@@ -54,6 +54,15 @@ export default {
       userInfo: {},
       // 展开、关闭的图标样式
       isOpen: true
+    }
+  },
+  created () {
+    this.loadUserInfo() // 请求用户信息
+  },
+  computed: {
+    // 处理用户的头像，返回的数据有的话就显示用户的头像，没有的话就显示一个默认的头像
+    circleUrl () {
+      return this.userInfo.circleUrl || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
     }
   },
   methods: {
@@ -104,15 +113,6 @@ export default {
         })
       })
     }
-  },
-  computed: {
-    // 处理用户的头像，返回的数据有的话就显示用户的头像，没有的话就显示一个默认的头像
-    circleUrl () {
-      return this.userInfo.circleUrl || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
-    }
-  },
-  created () {
-    this.loadUserInfo() // 请求用户信息
   }
 }
 </script>

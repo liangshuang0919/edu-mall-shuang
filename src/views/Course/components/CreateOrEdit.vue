@@ -4,6 +4,10 @@
     <el-card>
       <!-- 头部步骤条区域 -->
       <div slot="header">
+        <!-- 返回按钮 -->
+        <el-button class="el-icon-back" @click="$router.push({ name: 'Course' })">
+          返回
+        </el-button>
         <el-steps class="course-step" :active="activeStep" finish-status="success" simple>
           <el-step v-for="item in stepsInfo" :key="item.id" :title="item.title"
             @click.native="activeStep = item.id - 1"></el-step>
@@ -16,7 +20,8 @@
         <div v-show="activeStep === 0">
           <!-- 课程名称 -->
           <el-form-item label="课程名称" label-width="80px">
-            <el-input v-model="course.courseName" placeholder="请输入课程名称" maxlength="50" show-word-limit clearable>
+            <el-input v-model="course.courseName" placeholder="请输入课程名称" maxlength="50" show-word-limit
+              clearable>
             </el-input>
           </el-form-item>
           <!-- 课程简介 -->
@@ -27,25 +32,26 @@
           <!-- 课程概述 -->
           <el-form-item class="course-fields" label="课程概述" label-width="80px">
             <!-- 概述一 -->
-            <el-input class="course-field" v-model="course.previewFirstField" placeholder="请输入课程概述 1" maxlength="20"
-              show-word-limit clearable></el-input>
+            <el-input class="course-field" v-model="course.previewFirstField" placeholder="请输入课程概述 1"
+              maxlength="20" show-word-limit clearable></el-input>
             <!-- 概述二 -->
-            <el-input class="course-field" v-model="course.previewSecondField" placeholder="请输入课程概述 2" maxlength="20"
-              show-word-limit clearable></el-input>
+            <el-input class="course-field" v-model="course.previewSecondField" placeholder="请输入课程概述 2"
+              maxlength="20" show-word-limit clearable></el-input>
           </el-form-item>
           <!-- 讲师姓名 -->
           <el-form-item label="讲师姓名" label-width="80px">
-            <el-input v-model="course.teacherDTO.teacherName" placeholder="请输入讲师姓名" maxlength="50" show-word-limit
-              clearable></el-input>
+            <el-input v-model="course.teacherDTO.teacherName" placeholder="请输入讲师姓名" maxlength="50"
+              show-word-limit clearable></el-input>
           </el-form-item>
           <!-- 讲师简介 -->
           <el-form-item label="讲师简介" label-width="80px">
-            <el-input v-model="course.teacherDTO.description" placeholder="请输入讲师简介" maxlength="50" show-word-limit
-              clearable></el-input>
+            <el-input v-model="course.teacherDTO.description" placeholder="请输入讲师简介" maxlength="50"
+              show-word-limit clearable></el-input>
           </el-form-item>
           <!-- 课程排序 -->
           <el-form-item label="课程排序" label-width="80px">
-            <el-input-number v-model="course.sortNum" @change="handleChange" :min="1" :max="10" label="描述文字" />
+            <el-input-number v-model="course.sortNum" @change="handleChange" :min="1" :max="10"
+              label="描述文字" />
           </el-form-item>
         </div>
 
@@ -88,7 +94,8 @@
         <div v-show="activeStep === 3">
           <!-- 限时秒杀开关 -->
           <el-form-item label="限时秒杀开关" label-width="100px">
-            <el-switch v-model="course.activityCourse" active-color="#13ce66" inactive-color="#e9eef3"></el-switch>
+            <el-switch v-model="course.activityCourse" active-color="#13ce66" inactive-color="#e9eef3">
+            </el-switch>
           </el-form-item>
           <template v-if="course.activityCourse">
             <!-- 开始结束时间 -->
@@ -125,8 +132,8 @@
           </el-form-item>
           <!-- 控制当前课程是否上架 -->
           <el-form-item label="是否上架该课程">
-            <el-switch v-model="course.status" active-color="#13ce66" inactive-color="#e9eef3" :active-value="1"
-              :inactiive-value="0">
+            <el-switch v-model="course.status" active-color="#13ce66" inactive-color="#e9eef3"
+              :active-value="1" :inactiive-value="0">
             </el-switch>
           </el-form-item>
           <!-- 保存按钮 -->
