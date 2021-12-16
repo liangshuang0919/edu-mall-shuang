@@ -72,8 +72,8 @@
 
 <script>
 // 导入接口
-// 1、getRolePages：按条件查询角色
-// 2、deleteRole：删除角色
+// 1、getRolePages：按条件查询角色的接口
+// 2、deleteRole：删除角色的接口
 import { getRolePages, deleteRole } from '@/services/role'
 
 // 导入创建角色、编辑角色弹出的对话框内部的表单组件
@@ -96,6 +96,22 @@ export default {
       dialogVisible: false, // 控制对话框显示
       isEdit: false, // 控制对话框的功能状态（false 为保存新角色的状态；true 为编辑旧角色的状态）
       editRoleId: '' // 保存当前正在编辑的角色的 id
+    }
+  },
+  created () {
+    // 调用获取角色数据的函数
+    this.loadRoles()
+  },
+  filters: {
+    // 日期过滤器
+    dateFormat (date) {
+      // 格式服务器传递过来的日期
+      date = new Date(date)
+
+      return `
+        ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}
+        ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
+      `
     }
   },
   methods: {
@@ -171,22 +187,6 @@ export default {
           }
         })
     }
-  },
-  filters: {
-    // 日期过滤器
-    dateFormat (date) {
-      // 格式服务器传递过来的日期
-      date = new Date(date)
-
-      return `
-        ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}
-        ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
-      `
-    }
-  },
-  created () {
-    // 调用获取角色数据的函数
-    this.loadRoles()
   }
 }
 </script>

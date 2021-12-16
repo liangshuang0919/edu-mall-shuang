@@ -42,20 +42,20 @@ export const getAll = () => {
   })
 }
 
-// 6、给角色分配资源接口
+// 6、获取角色拥有的资源列表接口
+export const getRoleResources = (roleId) => {
+  return request({
+    method: 'GET',
+    url: `/boss/resource/getRoleResources?roleId=${roleId}`
+  })
+}
+
+// 7、给角色分配资源接口
 export const allocateRoleResources = (data) => {
   return request({
     method: 'POST',
     url: '/boss/resource/allocateRoleResources',
     data: data
-  })
-}
-
-// 7、获取角色拥有的资源列表接口
-export const getRoleResources = (roleId) => {
-  return request({
-    method: 'GET',
-    url: `/boss/resource/getRoleResources?roleId=${roleId}`
   })
 }
 
@@ -67,3 +67,20 @@ export const saveOrderUpdate = (data) => {
     data: data
   })
 }
+
+// <!-- 非配资源区域的头部全选按钮 -->
+//         <el-col :span="24">
+//           <div class="grid-content bg-row-header">
+//             <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">
+//               全选
+//             </el-checkbox>
+//           </div>
+//         </el-col>
+//         <!-- 分配资源区域的每个资源选框 -->
+//         <el-col :span="24">
+//           <div class="grid-content bg-purple">
+//             <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+//               <el-checkbox v-for="city in cities" :label="city" :key="city">{{ city }}</el-checkbox>
+//             </el-checkbox-group>
+//           </div>
+//         </el-col>

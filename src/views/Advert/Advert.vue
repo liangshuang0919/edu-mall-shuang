@@ -1,14 +1,12 @@
 <template>
-  <div class="advert">广告管理</div>
+  <div class="advert">
+    <el-empty description=" " :image-size="400"></el-empty>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Advert',
-  data () {
-    return {
-    }
-  }
+  name: 'Advert'
 }
 </script>
 

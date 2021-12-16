@@ -4,28 +4,29 @@
     <el-card>
       <!-- 头部课程相关信息 -->
       <div slot="header">
-        <el-button class="el-icon-back" @click="$router.push({ name: 'CourseSection', params: { courseId }})">
+        <el-button class="el-icon-back"
+          @click="$router.push({ name: 'CourseSection', params: { courseId }, query: { courseName: $route.query.courseName }})">
           返回
         </el-button>
       </div>
 
       <!-- 上传表单 -->
-      <el-form label-width="80px">
+      <el-form label-width="80px" :model="classData">
         <!-- 课程 -->
-        <el-form-item label="视频上传">
-          <el-input :disabled="true"></el-input>
+        <el-form-item label="课程">
+          <el-input v-model="classData.chapterName" :disabled="true"></el-input>
         </el-form-item>
         <!-- 课时 -->
-        <el-form-item label="视频上传">
-          <el-input :disabled="true"></el-input>
+        <el-form-item label="课时">
+          <el-input v-model="classData.className" :disabled="true"></el-input>
         </el-form-item>
         <!-- 视频上传 -->
         <el-form-item label="视频上传">
-          <input type="file" ref="video-file">
+          <input class="upload-input" type="file" ref="video-file">
         </el-form-item>
         <!-- 封面上传 -->
         <el-form-item label="封面上传">
-          <input type="file" ref="image-file">
+          <input class="upload-input" type="file" ref="image-file">
         </el-form-item>
         <!-- 开始上传按钮 -->
         <el-form-item>
@@ -71,7 +72,31 @@ export default {
       videoId: '', // 存储上传的视频的 ID
       uploadPercent: 0, // 视频上传百分比
       isUploadSuccess: false, // 视频上传完毕状态
-      isTransCodeSuccess: false // 视频转码完毕状态
+      isTransCodeSuccess: false, // 视频转码完毕状态
+      // 课时的内容
+      classData: {
+        chapterName: this.$route.query.courseName, // 课程名称
+        className: this.$route.query.className // 课时名称
+      },
+      // 校验规则
+      rules: {
+        // 课程名称
+        courseName: [
+          { required: true, message: '', trigger: 'blur' }
+        ],
+        // 章节名称
+        sectionName: [
+          { required: true, message: '请输入章节名称', trigger: 'blur' }
+        ],
+        // 课时名称
+        theme: [
+          { required: true, message: '请输入课时名称', trigger: 'blur' }
+        ],
+        // 时长
+        duration: [{ required: true }],
+        // 是否开放试听
+        isFree: [{ required: true }]
+      }
     }
   },
   created () {

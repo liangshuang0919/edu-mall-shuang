@@ -232,6 +232,13 @@ export default {
       }
     }
   },
+  created () {
+    // 当前组件编辑完成之后，判断当前是否为编辑状态
+    if (this.isEdit) {
+      // 如果是编辑状态，就发送请求，调用获取当前课程的信息函数
+      this.loadCourse()
+    }
+  },
   methods: {
     // 获取当前课程数据
     async loadCourse () {
@@ -271,13 +278,6 @@ export default {
           name: 'Course'
         })
       }
-    }
-  },
-  created () {
-    // 当前组件编辑完成之后，判断当前是否为编辑状态
-    if (this.isEdit) {
-      // 如果是编辑状态，就发送请求，调用获取当前课程的信息函数
-      this.loadCourse()
     }
   }
 }

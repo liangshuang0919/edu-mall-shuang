@@ -38,8 +38,10 @@
           <!-- 如果是课时内容的话 -->
           <span class="actions" v-else>
             <el-button size="mini" plain @click.stop="handleEdit(data)">编辑</el-button>
-            <el-button type="success" size="mini"
-              @click="$router.push({ name: 'CourseVideo', params: { courseId }, query:{ lessonId: data.id }})">
+            <el-button type="success" size="mini" @click="$router.push({
+              name: 'CourseVideo',
+              params: { courseId },
+              query:{ lessonId: data.id, courseName: $route.query.courseName, className: node.label }})">
               上传视频
             </el-button>
             <el-button type="info" size="mini" plain @click.stop="handleStatus(data)">

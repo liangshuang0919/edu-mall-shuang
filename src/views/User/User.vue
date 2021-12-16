@@ -14,11 +14,6 @@ export default {
   name: 'User',
   components: {
     UserList // 用户列表组件
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>

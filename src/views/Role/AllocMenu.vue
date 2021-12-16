@@ -49,6 +49,12 @@ export default {
       checkedKeys: [] // 默认要被勾选的列表项
     }
   },
+  created () {
+    // 调用获取所有菜单并按层级展示的函数
+    this.loadMenuNodeList()
+    // 调用获取当前角色所拥有的菜单选项函数
+    this.loadRoleMenus()
+  },
   methods: {
     // 点击保存按钮，保存所勾选的数据
     async onSave () {
@@ -110,12 +116,6 @@ export default {
     },
     // 点击树状列表触发的事件
     handleNodeClick (data) { }
-  },
-  created () {
-    // 调用获取所有菜单并按层级展示的函数
-    this.loadMenuNodeList()
-    // 调用获取当前角色所拥有的菜单选项函数
-    this.loadRoleMenus()
   }
 }
 </script>

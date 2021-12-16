@@ -14,11 +14,6 @@ export default {
   name: 'Role',
   components: {
     RoleList // 角色列表组件
-  },
-  data () {
-    return {
-
-    }
   }
 }
 </script>

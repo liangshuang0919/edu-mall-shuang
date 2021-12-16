@@ -57,6 +57,12 @@ export default {
       resourceCategories: [] // 存储资源分类下拉列表信息
     }
   },
+  created () {
+    // 调用加载对应成员的数据
+    this.loadresourceData()
+    // 加载资源列表
+    this.loadResourceCategories()
+  },
   methods: {
     // 获取当前资源的数据
     async loadresourceData () {
@@ -90,12 +96,6 @@ export default {
       this.$message.info('取消编辑！') // 保存或更新资源成功提示
       this.$emit('set-cancel') // 关闭提示框（需要子组件向父组件传递状态）
     }
-  },
-  created () {
-    // 调用加载对应成员的数据
-    this.loadresourceData()
-    // 加载资源列表
-    this.loadResourceCategories()
   }
 }
 </script>

@@ -116,6 +116,9 @@ export default {
       isLoading: false // 数据加载时，出现等待加载的遮罩层；并且控制按钮禁用状态
     }
   },
+  created () {
+    this.loadUser() // 调用加载用户列表信息函数
+  },
   methods: {
     // 查询按钮事件
     handleQuery () {
@@ -199,9 +202,6 @@ export default {
       this.filterParams.currentPage = val // 修改页号
       this.loadUser() // 调用请求按条件分页查询用户数据的方法，让当前页具体的数据显示出来
     }
-  },
-  created () {
-    this.loadUser() // 调用加载用户列表信息函数
   }
 }
 </script>

@@ -112,6 +112,22 @@ export default {
       isLoading: false // 数据加载时，出现等待加载的遮罩层；并且控制按钮禁用状态
     }
   },
+  created () {
+    // 调用请求按条件分页查询资源数据函数
+    this.loadResource()
+    // 加载资源列表
+    this.loadResourceCategories()
+  },
+  filters: {
+    // 日期过滤器
+    dateFormat (date) {
+      date = new Date(date) // 格式服务器传递过来的日期
+      return `
+        ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}
+        ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
+      `
+    }
+  },
   methods: {
     // 加载下拉资源列表
     async loadResourceCategories () {
@@ -198,22 +214,6 @@ export default {
       // 调用请求按条件分页查询资源数据的方法，让当前页具体的数据显示出来
       this.loadResource()
     }
-  },
-  filters: {
-    // 日期过滤器
-    dateFormat (date) {
-      date = new Date(date) // 格式服务器传递过来的日期
-      return `
-        ${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}
-        ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}
-      `
-    }
-  },
-  created () {
-    // 调用请求按条件分页查询资源数据函数
-    this.loadResource()
-    // 加载资源列表
-    this.loadResourceCategories()
   }
 }
 </script>

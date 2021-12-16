@@ -4,22 +4,25 @@
     <!-- 登录页面标题 -->
     <h2 class="title">客官，请先登录...</h2>
 
-    <el-form ref="form" :rules="formRules" label-position="top" :model="formData" label-width="250px" status-icon>
+    <el-form ref="form" :rules="formRules" label-position="top" :model="formData" label-width="250px"
+      status-icon>
       <!-- 手机号输入框 -->
       <el-form-item label="手机号" prop="phone">
-        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone" @keyup.enter.native="onSubmit">
+        <el-input v-model=" formData.phone" placeholder="请输入手机号" prefix-icon="el-icon-phone"
+          @keyup.enter.native="onSubmit" clearable>
         </el-input>
       </el-form-item>
       <!-- 密码输入框 -->
       <el-form-item label="密码" prop="password">
         <el-input v-model="formData.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock"
-          @keyup.enter.native="onSubmit">
+          @keyup.enter.native="onSubmit" clearable>
         </el-input>
       </el-form-item>
 
       <el-form-item class="btn">
         <!-- 登录按钮 -->
-        <el-button type="primary" plain @click="onSubmit" icon="el-icon-user-solid" :loading="isLoginLoading">登录</el-button>
+        <el-button type="primary" plain @click="onSubmit" icon="el-icon-user-solid" :loading="isLoginLoading">
+          登录</el-button>
         <!-- 取消登录按钮 -->
         <el-button type="danger" plain @click="resetForm('form')">重置</el-button>
       </el-form-item>
@@ -28,12 +31,6 @@
 </template>
 
 <script>
-// 导入 request 请求模块
-// import request from '@/utils/request'
-
-// 导入 qs 模块，用来格式化 url 地址
-// import qs from 'qs'
-
 // 导入封装的接口
 // 1、login：用户登录接口
 import { login } from '@/services/user'
@@ -71,15 +68,6 @@ export default {
   },
   methods: {
     // 登录按钮，提交表单方法
-    // 提交表单方式一，通过原生的提交方式：
-    // onSubmit () {
-    //   // validata 方法是对表单全部通过校验后的一个提交方法
-    //   // 有一个参数 valid，当所有表单验证通过后 valid 为 true；否则为 false
-    //   this.$refs.form.validate(valid => {
-    //     if(valid) {} else {}
-    //   })
-    // },
-    // 提交表单方式二，通过 async + await 异步的提交方式：
     async onSubmit () {
       try {
         // 点击登录按钮，让按钮显示加载的状态
@@ -88,18 +76,6 @@ export default {
         // 下面是网络请求的部分
         // 1. 设置校验成功的功能 —— 发送登录请求：
         await this.$refs.form.validate()
-
-        // 2. 发送请求
-        // 2.1 原生的请求方式
-        // // data 是服务器返回的数据
-        // // { data } 表示的是通过解构的方式获取所需要的 data 这个对象
-        // const { data } = await request({
-        //   method: 'POST', // 请求方式
-        //   header: { 'Content-type': 'application/x-www-form-urlencoded' }, // 请求参数的格式
-        //   url: '/front/user/login', // 请求地址
-        //   // post 发送请求的数据的格式应该是 urlencoded 格式的：名=值&名=值
-        //   data: qs.stringify(this.formData) // 将参数格式改成 名=值&名=值 的形式
-        // })
 
         // 2.2 使用自定义的请求方式
         const { data } = await login(this.formData)

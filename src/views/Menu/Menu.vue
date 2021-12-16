@@ -44,6 +44,10 @@ export default {
       tableData: []
     }
   },
+  created () {
+    // 调用加载菜单列表数据方法
+    this.loadAllMenuInfo()
+  },
   methods: {
     // 加载菜单列表数据方法
     async loadAllMenuInfo () {
@@ -92,10 +96,6 @@ export default {
         }
       })
     }
-  },
-  created () {
-    // 调用加载菜单列表数据方法
-    this.loadAllMenuInfo()
   }
 }
 </script>

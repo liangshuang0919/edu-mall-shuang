@@ -54,6 +54,12 @@ export default {
       }
     }
   },
+  created () {
+    // 如果当前是编辑状态，那么就调用加载对应成员的数据
+    if (this.isEdit) {
+      this.loadRoleData()
+    }
+  },
   methods: {
     // 获取学院的数据
     async loadRoleData () {
@@ -90,12 +96,6 @@ export default {
       this.$emit('set-cancel')
       // 除了给父组件中的对话框设置 destroy-on-close，也可以在关闭组件后，再次清空表单数据
       // this.roleData = {}
-    }
-  },
-  created () {
-    // 如果当前是编辑状态，那么就调用加载对应成员的数据
-    if (this.isEdit) {
-      this.loadRoleData()
     }
   }
 }

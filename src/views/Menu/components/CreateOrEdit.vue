@@ -125,6 +125,10 @@ export default {
       isLoginLoading: false
     }
   },
+  created () {
+    // 加载上级菜单信息
+    this.loadMenuInfo()
+  },
   methods: {
     // 加载菜单数据
     async loadMenuInfo () {
@@ -176,10 +180,6 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     }
-  },
-  created () {
-    // 加载上级菜单信息
-    this.loadMenuInfo()
   }
 }
 </script>

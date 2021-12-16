@@ -2,6 +2,7 @@
   <!-- 更改文章节、课时状态页面组件 -->
   <div class="change-status">
     <el-form>
+      <el-result :icon="info" :title="title"></el-result>
       <el-form-item label="状态变更为：" label-width="100px">
         <!-- 下拉菜单的区域 -->
         <el-select v-model="value" placeholder="请选择">
@@ -9,12 +10,12 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <!-- 按钮操作区域 -->
+      <el-form-item align="center">
+        <el-button style="width: 25%" @click="dialogVisible = false">取 消</el-button>
+        <el-button style="width: 25%" type="primary" @click="handleSubmit">确 定</el-button>
+      </el-form-item>
     </el-form>
-    <!-- 按钮操作区域 -->
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisible = false">取 消</el-button>
-      <el-button type="primary" @click="handleSubmit">确 定</el-button>
-    </span>
   </div>
 </template>
 
@@ -55,7 +56,24 @@ export default {
           label: '已更新'
         }
       ],
-      value: this.statusProps.status // 默认选中的 value 值
+      value: this.statusProps.status, // 默认选中的 value 值
+      info: '', // 控制 result 组件的图标样式
+      title: '' // 控制 result 组件的标题样式
+    }
+  },
+  mounted () {
+    // 节点挂载完毕更新样式图标
+    this.info = this.value === 0 ? 'info' : this.value === 1 ? 'warning' : 'success'
+    // 节点挂载完毕更新样式标题
+    this.title = this.value === 0 ? '该课时已隐藏' : this.value === 1 ? '该课时待更新' : '该课时已更新'
+  },
+  watch: {
+    // 监听下拉框的值
+    value () {
+      // 改变图标样式
+      this.info = this.value === 0 ? 'info' : this.value === 1 ? 'warning' : 'success'
+      // 改变标题样式
+      this.title = this.value === 0 ? '该课时已隐藏' : this.value === 1 ? '该课时待更新' : '该课时已更新'
     }
   },
   methods: {

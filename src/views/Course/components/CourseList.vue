@@ -105,6 +105,10 @@ export default {
       isLoading: true // 加载状态
     }
   },
+  created () {
+    // 调用加载课程函数
+    this.loadCourses()
+  },
   methods: {
     // 筛选操作
     handleFilter () {
@@ -176,10 +180,6 @@ export default {
       // 调用请求按条件分页查询资源数据的方法，让当前页具体的数据显示出来
       this.loadCourses()
     }
-  },
-  created () {
-    // 调用加载课程函数
-    this.loadCourses()
   }
 }
 </script>

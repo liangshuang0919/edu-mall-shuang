@@ -1,15 +1,12 @@
 <template>
-  <div class="home">主⻚</div>
+  <div class="home">
+    <el-empty description=" " :image-size="400"></el-empty>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
-  data () {
-    return {
-
-    }
-  }
+  name: 'Home'
 }
 </script>
 

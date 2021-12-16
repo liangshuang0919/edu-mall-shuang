@@ -18,12 +18,14 @@ const Home = () => import(/* webpackChunkName: 'Home' */ '@/views/Home/Home.vue'
 // 角色管理模块
 const Role = () => import(/* webpackChunkName: 'Role' */ '@/views/Role/Role.vue') // ⻆⾊管理页面
 const AllocMenu = () => import(/* webpackChunkName: 'AllocMenu' */ '@/views/Role/AllocMenu.vue') // 分配菜单页面
+const AllocResource = () => import(/* webpackChunkName: 'AllocResource' */ '@/views/Role/AllocResource.vue') // 分配资源页面
 
 // 菜单管理模块
 const Menu = () => import(/* webpackChunkName: 'Menu' */ '@/views/Menu/Menu.vue') // 菜单列表主页面
 const MenuCreate = () => import(/* webpackChunkName: 'MenuCreate' */ '@/views/Menu/MenuCreate.vue') // 添加菜单页面页面
 const MenuEdit = () => import(/* webpackChunkName: 'MenuEdit' */ '@/views/Menu/MenuEdit.vue') // 编辑菜单页面页面
 
+// 资源管理模块
 const Resource = () => import(/* webpackChunkName: 'Resource' */ '@/views/Resource/Resource.vue') // 资源管理页面
 
 // 课程管理模块
@@ -84,6 +86,16 @@ const routes = [
         props: true, // 将动态路由的参数通过 props 传递给组件
         meta: {
           title: 'Shuang-分配菜单'
+        }
+      },
+      // 分配资源页面路由
+      {
+        path: '/role/:roleId/alloc-resource',
+        name: 'AllocResource',
+        component: AllocResource,
+        props: true, // 将动态路由的参数通过 props 传递给组件
+        meta: {
+          title: 'Shuang-分配资源'
         }
       },
       // 菜单列表页面路由
